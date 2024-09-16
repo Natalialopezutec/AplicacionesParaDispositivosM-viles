@@ -92,7 +92,7 @@ class _ProductDetailsState extends State<ProductDetailsClient> {
                         value: producto!.precio.toString(),
                       ),
                       _buildInputField(
-                        label: 'Descripción',
+                        label: 'Descripcion',
                         value: producto!.detalle,
                       ),
                       const SizedBox(height: 20),
