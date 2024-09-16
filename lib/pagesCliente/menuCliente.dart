@@ -108,13 +108,13 @@ class _MenuClienteState extends State<MenuCliente> {
                       }
                     }),
                     _buildButton(context, 'Historial de Pagos', () {
-                      print('Llendo a historialComprasCliente');
+                      print('Yendo a historialComprasCliente');
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => HistorialComprasPage(
-                              idUsuario:
-                                  widget.idUsuario), // Enviar solo el idUsuario
+                              usuario:
+                                  usuario!), // Enviar solo el idUsuario
                         ),
                       );
                     }),

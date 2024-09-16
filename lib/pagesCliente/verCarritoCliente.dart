@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hola_mundo_flutter/widget/appBar.dart';
 import '../services/carrito_service.dart'; // Importa el servicio de carrito
 import '../services/firebaseProductos_service.dart'; // Importa el servicio de productos
 import '../services/firebaseUsuario_service.dart';
@@ -80,10 +81,7 @@ class _CartScreenState extends State<CartScreen> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Tu Carrito', style: AppStyles.titleTextStyle),
-        backgroundColor: AppStyles.primaryColor,
-      ),
+      appBar: AppBarConMenu(usuario:  widget.usuario, title: 'Tu Carrito'),
       body: Container(
         decoration: AppStyles.backgroundGradient,
         child: _cartItems.isEmpty

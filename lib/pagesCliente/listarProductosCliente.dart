@@ -49,7 +49,7 @@ class ProductListCliente extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProductDetailsClient(idProducto: producto.idProducto),
+                        builder: (context) => ProductDetailsClient(usuario: usuario,idProducto: producto.idProducto),
                       ),
                     );
                   },
