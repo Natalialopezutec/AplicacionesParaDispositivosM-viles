@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hola_mundo_flutter/pagesCliente/historialComprasCliente.dart';
 import 'package:hola_mundo_flutter/widget/appBar.dart';
 import '../services/carrito_service.dart'; // Importa el servicio de carrito
 import '../services/firebaseProductos_service.dart'; // Importa el servicio de productos
@@ -164,16 +165,23 @@ ElevatedButton(
         total: total,
         productos: productos,
       );
-      
+
       // Limpiar el carrito después de la compra
       await _clearCart();
-      
+
       // Mostrar mensaje de éxito
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Compra realizada exitosamente')),
       );
-      
-      // Redirigir o actualizar la vista según sea necesario
+
+      // Redirigir a la página de historial de compras
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HistorialComprasPage(usuario: widget.usuario),
+        ),
+      );
+
     } catch (e) {
       print('Error al registrar el pago: $e');
       // Mostrar mensaje de error

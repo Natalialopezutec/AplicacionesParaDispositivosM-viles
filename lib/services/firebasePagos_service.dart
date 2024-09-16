@@ -33,8 +33,7 @@ Future<void> registrarPago({
 }
 
 
- // Obtener el historial de pagos de un cliente específico sin usar un índice compuesto
-  Future<List<Map<String, dynamic>>> obtenerHistorialPagosCliente(String idUsuario) async {
+ Future<List<Map<String, dynamic>>> obtenerHistorialPagosCliente(String idUsuario) async {
   if (idUsuario.isEmpty) {
     print('Error: ID de usuario no puede estar vacío.');
     return [];
@@ -42,20 +41,31 @@ Future<void> registrarPago({
 
   try {
     QuerySnapshot snapshot = await pagosCollection
-      .where('IDUsuario', isEqualTo: idUsuario)
-      .get();
-      
-    // Mapeamos los datos incluyendo el ID del documento
-    return snapshot.docs.map((doc) {
+        .where('IDUsuario', isEqualTo: idUsuario)
+        .get();
+
+    // Mapeamos los datos, incluyendo el ID del documento
+    List<Map<String, dynamic>> pagos = snapshot.docs.map((doc) {
       var data = doc.data() as Map<String, dynamic>;
       data['ID'] = doc.id; // Asignar el ID del documento
       return data;
     }).toList();
+
+    // Ordenar la lista localmente por el campo 'Fecha'
+    pagos.sort((a, b) {
+      Timestamp fechaA = a['Fecha'];
+      Timestamp fechaB = b['Fecha'];
+      return fechaB.compareTo(fechaA); // Orden descendente (más reciente primero)
+    });
+
+    return pagos;
   } catch (e) {
     print('Error al obtener historial de pagos del cliente: $e');
     return [];
   }
 }
+
+
 
 
 
